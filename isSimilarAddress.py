@@ -11,6 +11,11 @@ def readFile(FILESTRING):
 
 IGNORED_WORDS = {"ja?l?a?n? ", "jakarta"}
 def tokenize(str):
+    """
+    Tokenises a string by spliting it at commas and removes ignored words
+    :param str: string to be tokenised
+    :return: List of tokens
+    """
     strList = str.split(", ")
     for i in range(len(strList)):
         for IW in IGNORED_WORDS:
@@ -19,6 +24,12 @@ def tokenize(str):
     return strList
 
 def similarity(add1, add2):
+    """
+
+    :param add1: address 1
+    :param add2: address 2
+    :return: Similarity index of (matching tokens / longest address tokens)
+    """
     str1 = tokenize(add1)
     str2 = tokenize(add2)
     totalTokens = max(len(str1), len(str2))
@@ -32,13 +43,27 @@ def similarity(add1, add2):
                 continue
     return matchingTokens/totalTokens
 
+
 def zeroList(n):
+    """
+
+    :param n: number of elements
+    :return: list of n elements all initialised to Zero
+    """
     requiredList = []
     for i in range(n):
         requiredList.append(0)
     return requiredList
 
 def getSimilarAddresses(input, limit, file, column):
+    """
+
+    :param input: the address the driver wants to go to
+    :param limit: the amount of similar addresses required
+    :param file: the database to read from
+    :param column: the column where the addresses to be compared to are
+    :return: A list of size limit containing the top {Location : Similarity} pairs
+    """
     results = zeroList(limit)
     simResults = zeroList(limit)
     OpenedFile = readFile(file)
