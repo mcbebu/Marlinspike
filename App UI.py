@@ -1,33 +1,40 @@
-from tkinter import *
-#import GIS
-from tkinterweb import HtmlFrame
-import os
+import webview
+from GIS import createhtml
 
-HTML_file_path = os.path.join(os.getcwd(), "GIS.html")
-print("BREAK"+HTML_file_path)
+Exsimilar = {
+    'x': [-6.215555671220000],
+    'y': [106.22891070606781],
+    'desc': ["Additional Infomation"]}
+Exlocation = (-6.215555671198995, 106.28891070606781)
 
-root = Tk()
-root.title("Delivery Locator")
-s_width = 412
-s_height = 732
+createhtml(Exlocation, Exsimilar)
+with open('App UI.html', 'r') as thehtml:
+    thetext = thehtml.read()
+    print(thetext)
+    textlist = thetext.split("</body>")
+    textlist.insert(1, '''<script language="Javascript" >
+        function download(filename, text) {
+          var pom = document.createElement('a');
+          pom.setAttribute('href', 'data:text/plain;charset=utf-8,' +
 
-root.geometry("%dx%d" % (s_width, s_height))
-base_plate = Frame(root, bg="black", width=s_width, height=s_height)
-base_plate.pack_propagate(0)
-base_plate.pack()
+        encodeURIComponent(text));
+          pom.setAttribute('download', filename);
 
+          pom.style.display = 'none';
+          document.body.appendChild(pom);
 
+          pom.click();
 
-def open_map_page():
-    map_page = Frame(base_plate, bg="grey", width=s_width, height=s_height)
-    map_page.pack_propagate(0)
-    map_page.pack()
-    map_frame = HtmlFrame(map_page, horizontal_scrollbar="auto")
-    print("HERE")
-    map_frame.load_file(HTML_file_path)
+          document.body.removeChild(pom);
+        }
+      </script>
+<form onsubmit="download(this['name'].value, this['text'].value)">
+      <textarea rows=3 cols=50 name="text">Ninja Advice. </textarea>
+      <input type="submit" value="Download">
+    </form></body>''')
+    thetext="".join(textlist)
+with open('App UI.html', 'w') as thehtml:
+    thehtml.write(thetext)
 
-    map_frame.pack(fill="both", expand=True)
-
-#open_map_page()
-
-root.mainloop()
+webview.create_window("MAP", 'App UI.html')
+webview.start()
