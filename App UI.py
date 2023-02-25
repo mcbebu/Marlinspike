@@ -1,5 +1,5 @@
 from tkinter import *
-import GIS
+#import GIS
 from tkinterweb import HtmlFrame
 import os
 
@@ -28,6 +28,6 @@ def open_map_page():
 
     map_frame.pack(fill="both", expand=True)
 
-open_map_page()
+#open_map_page()
 
 root.mainloop()
