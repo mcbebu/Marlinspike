@@ -2,9 +2,9 @@ import webview
 from GIS import createhtml
 
 Exsimilar = {
-    'x': [-6.215555671220000],
-    'y': [106.22891070606781],
-    'desc': ["Additional Infomation"]}
+    'longitude': [-6.215555671220000],
+    'latitude': [106.22891070606781],
+    'description': ["Additional Infomation"]}
 Exlocation = (-6.215555671198995, 106.28891070606781)
 
 createhtml(Exlocation, Exsimilar)
