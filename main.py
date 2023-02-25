@@ -1,8 +1,7 @@
 import isSimilarAddress
 from GIS import get_location
 from geopy.geocoders import Nominatim
-
-# Initialize Nominatim API
+import AppUI
 
 
 temp_data = {
@@ -41,9 +40,9 @@ def location_outputs(loc_list, all_list, original_address):
         closest_locs["longitude"].append(temp_all["longitude"].pop(data_pos))
         closest_locs["description"].append(temp_all["description"].pop(data_pos))
         temp_all["address"].pop(data_pos)
-    # output is ( (coordinates), {similar address dictionary} )
-    return original_coords, closest_locs
 
+    return original_coords, closest_locs
+# output is ( (coordinates), {similar address dictionary} )
 
 # print(location_outputs(isSimilarAddress.get_similar_addresses("adr1",2,temp_data,0), temp_data, "adr1"))
 
@@ -52,4 +51,12 @@ def new_data(all_list, new_adr, new_discr):
     lat, long = get_location()
     all_list["latitude"].append(lat)
     all_list["longitude"].append(long)
-    all_list.append(new_discr)
+    all_list["description"].append(new_discr)
+
+order_address = input_address()
+narrowed_list = isSimilarAddress.get_similar_addresses(order_address,2,temp_data,0)
+address_n_adjacent = location_outputs(narrowed_list, temp_data, order_address)
+print(address_n_adjacent[0])
+print(address_n_adjacent[1])
+new_description = AppUI.app(location=address_n_adjacent[0], similar=address_n_adjacent[1])
+new_data(temp_data, order_address, new_description)
