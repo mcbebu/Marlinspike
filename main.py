@@ -2,7 +2,6 @@ import isSimilarAddress
 from GIS import get_location
 from geopy.geocoders import Nominatim
 import AppUI
-# Initialize Nominatim API
 
 
 temp_data = {
