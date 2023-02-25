@@ -28,7 +28,7 @@ def createhtml(location=Exlocation, similar=Exsimilar):
         lat=location[0],
         lng=location[1],
         map_type='roadmap',
-        zoom=10,
+        zoom=15,
     )
     p = gmap(
         api_key,
@@ -40,7 +40,6 @@ def createhtml(location=Exlocation, similar=Exsimilar):
     )
     _ = p.cross('y', 'x', size=20, color='blue', source=source)
     show(p)
-
 
 def get_location():
     # open following url to get ipaddress
