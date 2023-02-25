@@ -1,0 +1,4 @@
+Bukit Batok St 23,Changi Airport,Geylang Road,Jurong East
+103.75587,103.989441,103.8667,103.741247
+1.34082,1.359167,1.3000,1.338296
+Hungry,Traveller,Thirsty,Worky

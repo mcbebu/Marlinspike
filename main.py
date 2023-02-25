@@ -2,14 +2,16 @@ import isSimilarAddress
 from GIS import get_location
 from geopy.geocoders import Nominatim
 from AppUI import app
+from csv import reader, writer
 
-temp_data = {
-    "address": ["Bukit Batok St 23", "Changi Airport", "Geylang Road", "Jurong East"],
-    "longitude": ["103.75587", "103.989441", "103.8667", "103.741247"],
-    "latitude": ["1.34082", "1.359167", "1.3000", "1.338296"],
-    "description": ["Hungry", "Traveller", "Thirsty", "Worky"]
-}
+temp_data={}
 
+with open('data.txt', 'r', newline='') as f:
+    values = [row for row in reader(f)]
+    temp_data["address"] = values[0]
+    temp_data["longitude"] = values[1]
+    temp_data["latitude"] = values[2]
+    temp_data["description"] = values[3]
 # print(isSimilarAddress.get_similar_addresses("adr1",2,temp_data,0))
 def prelim_lat_long(address):
     geolocator = Nominatim(user_agent="MyApp")
