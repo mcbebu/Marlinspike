@@ -1,7 +1,6 @@
 # import anyio
 # import appnope
-# import attrs
-
+import attrs
 import spacy
 nlp = spacy.load('en_core_web_md')
 tokenizeFirstSample = nlp(u'I slapped him in the face')

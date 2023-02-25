@@ -1,7 +1,7 @@
 from bokeh.io import show
 from bokeh.plotting import gmap
 from bokeh.models import GMapOptions, HoverTool, ColumnDataSource
-from winrt.windows.devices import geolocation
+#from winrt.windows.devices import geolocation
 # get gps coordinates from geopy
 import json
 
