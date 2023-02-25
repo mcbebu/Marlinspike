@@ -1,14 +1,14 @@
-import pandas as pd
-import os
 from bokeh.io import show
 from bokeh.plotting import gmap
 from bokeh.models import GMapOptions, HoverTool, ColumnDataSource
+from winrt.windows.devices import geolocation
 api_key = 'AIzaSyBKLCe5ynMhpk5lYN8thXT-iT889X5L1Cs'
 Exsimilar = {
     'x': [-6.215555671220000],
     'y': [106.22891070606781],
     'desc': ["Additional Infomation"]}
 Exlocation = (-6.215555671198995, 106.28891070606781)
+
 
 def createhtml(location=Exlocation, similar=Exsimilar):
 
@@ -36,4 +36,7 @@ def createhtml(location=Exlocation, similar=Exsimilar):
     _ = p.cross('y', 'x', size=20, color='blue', source=source)
     show(p)
 
-createhtml()
+
+Locator = geolocation.Geolocator()
+x = await Locator.get_geoposition_async()
+print(x)

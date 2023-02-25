@@ -1,8 +1,13 @@
 import re
 import pandas
 
-testString1 = pandas.read_csv("customer_addresses_id.csv").iloc[0,1]
-testString2 = pandas.read_csv("customer_addresses_id.csv").iloc[16,1]
+def readFile(FILESTRING):
+    return pandas.read_csv(FILESTRING)
+
+OpenedFile = readFile("customer_addresses_id.csv")
+
+df = OpenedFile.shape;
+print(df[0])
 #tokenize
 # by commas
 # sort
@@ -29,6 +34,20 @@ def similarity(add1, add2):
                 continue
     return matchingTokens/totalTokens
 
+def zeroList(n):
+    requiredList = []
+    for i in range(n):
+        requiredList.append(0)
+    return requiredList
 
-def getSimilarAddresses(curr, limit):
-    results = []
+def getSimilarAddresses(input, limit, column, row):
+    results = zeroList(limit)
+    tokenInput = tokenize(input)
+    databaseSize = df[0]
+    for i in range(databaseSize):
+        sim = similarity(tokenInput, tokenize(OpenedFile.iloc[column, row]))
+        for i in range(len(results)):
+            if (sim >= results[i]):
+                results.insert(sim, i).pop()
+    return results
+
