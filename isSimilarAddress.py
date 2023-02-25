@@ -109,6 +109,6 @@ sample_dict = {"Addresses": ["addr1", "addr2"],
                "Y": ["y1", "y2"],
                "Desc": ["desc1", "desc2"]}
 
-x = get_similar_addresses("addr1", 1, sample_dict, )
+x = get_similar_addresses("addr1", 1, sample_dict, 0)
 
-# [print(y) for y in x.items()]
+[print(y) for y in x.items()]
