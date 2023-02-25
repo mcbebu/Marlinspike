@@ -40,16 +40,21 @@ def zeroList(n):
 
 def getSimilarAddresses(input, limit, file, column):
     results = zeroList(limit)
+    simResults = zeroList(limit)
     OpenedFile = readFile(file)
     databaseSize = OpenedFile.shape[0]
     for i in range(databaseSize):
         sim = similarity(input, OpenedFile.iloc[i, column])
-        for i in range(len(results)):
-            if (sim >= results[i]):
-                results.insert(i, sim)
+        for j in range(len(results)):
+            if (sim >= simResults[j]):
+                simResults.insert(j, sim)
+                simResults.pop()
+                results.insert(j, OpenedFile.iloc[i, column])
                 results.pop()
                 break
-    return results
+    return dict(zip(results, simResults))
 
-print(getSimilarAddresses("jalan Rawakuda pengaritan Rt01/Rw01 · Karangharum (Karang Harum), Jawa Barat, Kab. Bekasi, Kedung Waringin"
-                          , 5, "customer_addresses_id.csv", 1))
+x = getSimilarAddresses("jalan Rawakuda pengaritan Rt01/Rw01 · Karangharum (Karang Harum), Jawa Barat, Kab. Bekasi, Kedung Waringin"
+                          , 5, "customer_addresses_id.csv", 1)
+
+[print(y) for y in x.items()]
