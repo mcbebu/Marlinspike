@@ -10,25 +10,25 @@ from urllib.request import urlopen
 
 api_key = 'AIzaSyBKLCe5ynMhpk5lYN8thXT-iT889X5L1Cs'
 Exsimilar = {
-    'x': [-6.215555671220000],
-    'y': [106.22891070606781],
-    'desc': ["Additional Infomation"]}
+    'longitude': [-6.215555671220000],
+    'latitude': [106.22891070606781],
+    'description': ["Additional Infomation"]}
 Exlocation = (-6.215555671198995, 106.28891070606781)
 
 
 def createhtml(location=Exlocation, similar=Exsimilar):
     hover = HoverTool(tooltips=[
-        ('Description', '@desc')
+        ('Description', '@description')
     ])
-    similar['x'].append(location[0])
-    similar['y'].append(location[1])
-    similar['desc'].append("Target Location")
+    similar['longitude'].append(location[0])
+    similar['latitude'].append(location[1])
+    similar['description'].append("Target Location")
     source = ColumnDataSource(data=similar)
     gmoptions = GMapOptions(
         lat=location[0],
         lng=location[1],
         map_type='roadmap',
-        zoom=10,
+        zoom=15,
     )
     p = gmap(
         api_key,
@@ -38,9 +38,8 @@ def createhtml(location=Exlocation, similar=Exsimilar):
         height=400,
         tools=[hover, 'reset', 'wheel_zoom', 'pan']
     )
-    _ = p.cross('y', 'x', size=20, color='blue', source=source)
+    _ = p.cross('latitude', 'longitude', size=20, color='blue', source=source)
     show(p)
-
 
 def get_location():
     # open following url to get ipaddress

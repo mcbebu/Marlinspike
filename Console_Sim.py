@@ -6,16 +6,19 @@ from geopy.geocoders import Nominatim
 
 
 temp_data = {
-    "addresses": ["adr1", "adr2", "adr3", "adr4"],
+    "address": ["adr1", "adr2", "adr3", "adr4"],
     "longitude": ["1.05", "2.07", "3.62", "4.19"],
     "latitude": ["1.57", "3.76", "2.46", "4.76"],
     "description": ["desc1", "desc2", "desc3", "desc4"]
 }
 
 
+# print(isSimilarAddress.get_similar_addresses("adr1",2,temp_data,0))
 def prelim_lat_long(address):
     geolocator = Nominatim(user_agent="MyApp")
     location = geolocator.geocode(address)
+    if location is None:
+        return 0, 0
     return location.latitude, location.longitude
 
 
@@ -34,13 +37,15 @@ def location_outputs(loc_list, all_list, original_address):
     temp_all = all_list
     for adr in loc_list:
         data_pos = temp_all["address"].index(adr)
-        closest_locs["latitude"].append(temp_all["latitude"].pop([data_pos]))
-        closest_locs["longitude"].append(temp_all["longitude"].pop([data_pos]))
-        closest_locs["description"].append(temp_all["description"].pop([data_pos]))
-        temp_all.pop([data_pos])
-
+        closest_locs["latitude"].append(temp_all["latitude"].pop(data_pos))
+        closest_locs["longitude"].append(temp_all["longitude"].pop(data_pos))
+        closest_locs["description"].append(temp_all["description"].pop(data_pos))
+        temp_all["address"].pop(data_pos)
+    # output is ( (coordinates), {similar address dictionary} )
     return original_coords, closest_locs
 
+
+# print(location_outputs(isSimilarAddress.get_similar_addresses("adr1",2,temp_data,0), temp_data, "adr1"))
 
 def new_data(all_list, new_adr, new_discr):
     all_list["address"].append(new_adr)
