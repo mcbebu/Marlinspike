@@ -4,10 +4,6 @@ import pandas
 def readFile(FILESTRING):
     return pandas.read_csv(FILESTRING)
 
-OpenedFile = readFile("customer_addresses_id.csv")
-
-df = OpenedFile.shape;
-print(df[0])
 #tokenize
 # by commas
 # sort
@@ -27,10 +23,12 @@ def similarity(add1, add2):
     str2 = tokenize(add2)
     totalTokens = max(len(str1), len(str2))
     matchingTokens = 0;
-    for token1 in str1:
-        for token2 in str2:
-            if token1 == token2:
+    for i in range(len(str1)):
+        for j in range(len(str2)):
+            if str1[i] == str2[j]:
                 matchingTokens += 1
+                # solve edge case of str1 which have many copies of a word from str2
+                str2[i] = re.sub("token2","",str2[i])
                 continue
     return matchingTokens/totalTokens
 
@@ -40,14 +38,18 @@ def zeroList(n):
         requiredList.append(0)
     return requiredList
 
-def getSimilarAddresses(input, limit, column, row):
+def getSimilarAddresses(input, limit, file, column):
     results = zeroList(limit)
-    tokenInput = tokenize(input)
-    databaseSize = df[0]
+    OpenedFile = readFile(file)
+    databaseSize = OpenedFile.shape[0]
     for i in range(databaseSize):
-        sim = similarity(tokenInput, tokenize(OpenedFile.iloc[column, row]))
+        sim = similarity(input, OpenedFile.iloc[i, column])
         for i in range(len(results)):
             if (sim >= results[i]):
-                results.insert(sim, i).pop()
+                results.insert(i, sim)
+                results.pop()
+                break
     return results
 
+print(getSimilarAddresses("jalan Rawakuda pengaritan Rt01/Rw01 · Karangharum (Karang Harum), Jawa Barat, Kab. Bekasi, Kedung Waringin"
+                          , 5, "customer_addresses_id.csv", 1))
