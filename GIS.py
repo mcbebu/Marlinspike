@@ -38,7 +38,8 @@ def createhtml(location, similar):
         height=400,
         tools=[hover, 'reset', 'wheel_zoom', 'pan']
     )
-    _ = p.circle('latitude', 'longitude', size=10, color='blue', source=source)
+    print(similar)
+    _ = p.circle('longitude', 'latitude', size=10, color='blue', source=source)
     _ = p.cross('latitude', 'longitude', size=20, color='red', source=locdict)
     show(p)
 

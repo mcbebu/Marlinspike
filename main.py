@@ -1,16 +1,14 @@
 import isSimilarAddress
 from GIS import get_location
 from geopy.geocoders import Nominatim
-import AppUI
-
+from AppUI import app
 
 temp_data = {
-    "address": ["Simpang Bedok", "Changi Airport", "Geylang Road", "Jurong East"],
-    "longitude": ["103.945922", "103.989441", "103.8667", "103.741247"],
-    "latitude": ["1.332934", "1.359167", "1.3000", "1.338296"],
+    "address": ["Bukit Batok St 23", "Changi Airport", "Geylang Road", "Jurong East"],
+    "longitude": ["103.75587", "103.989441", "103.8667", "103.741247"],
+    "latitude": ["1.34082", "1.359167", "1.3000", "1.338296"],
     "description": ["Hungry", "Traveller", "Thirsty", "Worky"]
 }
-
 
 # print(isSimilarAddress.get_similar_addresses("adr1",2,temp_data,0))
 def prelim_lat_long(address):
@@ -34,6 +32,7 @@ def location_outputs(loc_list, all_list, original_address):
         "description": []
     }
     temp_all = all_list
+    temp_all["address"] = temp_all['address'][::-1]
     for adr in loc_list:
         data_pos = temp_all["address"].index(adr)
         closest_locs["latitude"].append(temp_all["latitude"].pop(data_pos))
@@ -54,9 +53,11 @@ def new_data(all_list, new_adr, new_discr):
     all_list["description"].append(new_discr)
 
 order_address = input_address()
-narrowed_list = isSimilarAddress.get_similar_addresses(order_address,2,temp_data,0)
+narrowed_list = isSimilarAddress.get_similar_addresses(order_address, 2,temp_data,0)
 address_n_adjacent = location_outputs(narrowed_list, temp_data, order_address)
 print(address_n_adjacent[0])
+address_n_adjacent[1]['latitude'] = [float(x) for x in address_n_adjacent[1]['latitude']]
+address_n_adjacent[1]['longitude'] = [float(x) for x in address_n_adjacent[1]['longitude']]
 print(address_n_adjacent[1])
-new_description = AppUI.app(location=address_n_adjacent[0], similar=address_n_adjacent[1])
+new_description = app(location=address_n_adjacent[0], similar=address_n_adjacent[1])
 new_data(temp_data, order_address, new_description)
