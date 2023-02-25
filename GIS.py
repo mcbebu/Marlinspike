@@ -1,8 +1,6 @@
 from bokeh.io import show
 from bokeh.plotting import gmap
 from bokeh.models import GMapOptions, HoverTool, ColumnDataSource
-#from winrt.windows.devices import geolocation
-# get gps coordinates from geopy
 import json
 
 # import urlopen from urllib.request
@@ -10,19 +8,21 @@ from urllib.request import urlopen
 
 api_key = 'AIzaSyBKLCe5ynMhpk5lYN8thXT-iT889X5L1Cs'
 Exsimilar = {
-    'longitude': [-6.215555671220000],
+    'longitude': [-6.215655671198995],
     'latitude': [106.22891070606781],
-    'description': ["Additional Infomation"]}
+    'description': ["Additional Infomation Additional Infomation Additional Infomation Additional Infomation"]}
 Exlocation = (-6.215555671198995, 106.28891070606781)
 
 
-def createhtml(location=Exlocation, similar=Exsimilar):
+def createhtml(location, similar):
     hover = HoverTool(tooltips=[
         ('Description', '@description')
     ])
-    similar['longitude'].append(location[0])
-    similar['latitude'].append(location[1])
-    similar['description'].append("Target Location")
+    locdict={
+        'longitude': [location[0]],
+        'latitude': [location[1]],
+        'description': ["Target Location"]
+    }
     source = ColumnDataSource(data=similar)
     gmoptions = GMapOptions(
         lat=location[0],
@@ -38,7 +38,9 @@ def createhtml(location=Exlocation, similar=Exsimilar):
         height=400,
         tools=[hover, 'reset', 'wheel_zoom', 'pan']
     )
-    _ = p.cross('latitude', 'longitude', size=20, color='blue', source=source)
+    print(similar)
+    _ = p.circle('longitude', 'latitude', size=10, color='blue', source=source)
+    _ = p.cross('latitude', 'longitude', size=20, color='red', source=locdict)
     show(p)
 
 def get_location():
