@@ -6,10 +6,10 @@ from geopy.geocoders import Nominatim
 
 
 temp_data = {
-    "address": ["adr1", "adr2", "adr3", "adr4"],
-    "longitude": ["1.05", "2.07", "3.62", "4.19"],
-    "latitude": ["1.57", "3.76", "2.46", "4.76"],
-    "description": ["desc1", "desc2", "desc3", "desc4"]
+    "address": ["Simpang Bedok", "Changi Airport", "Geylang Road", "Jurong East"],
+    "longitude": ["103.945922", "103.989441", "103.8667", "103.741247"],
+    "latitude": ["1.332934", "1.359167", "1.3000", "1.338296"],
+    "description": ["Hungry", "Traveller", "Thirsty", "Worky"]
 }
 
 
