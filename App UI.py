@@ -49,5 +49,3 @@ def app(location=Exlocation, similar=Exsimilar):
     webview.start()
     with open('C:\\Users\\Georgie\\Downloads\\undefined.txt', 'r') as response:
         return response.read()
-
-print(app())
