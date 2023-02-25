@@ -1,3 +1,4 @@
 # Marlinspike
 
-spacy library may only work in py3.0
+spacy version: 3.4.3
+spacy library will only work if these libraries are installed
