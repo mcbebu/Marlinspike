@@ -12,7 +12,8 @@ temp_data = {
     "description": ["desc1", "desc2", "desc3", "desc4"]
 }
 
-#print(isSimilarAddress.get_similar_addresses("adr1",2,temp_data,0))
+
+# print(isSimilarAddress.get_similar_addresses("adr1",2,temp_data,0))
 def prelim_lat_long(address):
     geolocator = Nominatim(user_agent="MyApp")
     location = geolocator.geocode(address)
@@ -40,10 +41,11 @@ def location_outputs(loc_list, all_list, original_address):
         closest_locs["longitude"].append(temp_all["longitude"].pop(data_pos))
         closest_locs["description"].append(temp_all["description"].pop(data_pos))
         temp_all["address"].pop(data_pos)
-
+    # output is ( (coordinates), {similar address dictionary} )
     return original_coords, closest_locs
 
-#print(location_outputs(isSimilarAddress.get_similar_addresses("adr1",2,temp_data,0), temp_data, "adr1"))
+
+# print(location_outputs(isSimilarAddress.get_similar_addresses("adr1",2,temp_data,0), temp_data, "adr1"))
 
 def new_data(all_list, new_adr, new_discr):
     all_list["address"].append(new_adr)
