@@ -20,7 +20,7 @@ def app(location=Exlocation, similar=Exsimilar):
             print('Destroyed!')
 
     createhtml(location, similar)
-    with open('App UI.html', 'r') as thehtml:
+    with open('main.html', 'r') as thehtml:
         thetext = thehtml.read()
         textlist = thetext.split("</body>")
         textlist.insert(1, '''<script language="Javascript" >
@@ -41,11 +41,12 @@ def app(location=Exlocation, similar=Exsimilar):
           <input type="submit" value="Download">
         </form></body>''')
         thetext="".join(textlist)
-    with open('App UI.html', 'w') as thehtml:
+    with open('main.html', 'w') as thehtml:
         thehtml.write(thetext)
     api = Api()
-    window = webview.create_window("MAP", 'App UI.html', js_api=api,)
+    window = webview.create_window("MAP", 'main.html', js_api=api,)
     api.set_window(window)
     webview.start()
-    with open('C:\\Users\\Georgie\\Downloads\\undefined.txt', 'r') as response:
+    with open("C:\\Users\\User\\Downloads\\undefined.txt", 'r') as response:
         return response.read()
+
