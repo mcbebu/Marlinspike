@@ -1,7 +1,9 @@
 # import anyio
 # import appnope
-import attrs
+# import attrs
 import spacy
+import pandas
+
 nlp = spacy.load('en_core_web_md')
 tokenizeFirstSample = nlp(u'I slapped him in the face')
 tokenizeSecondSample = nlp(u'he hit me on the head')
@@ -14,10 +16,10 @@ print(tokenizeThirdSample.similarity(tokenizeSecondSample)); # returns 0.77
 POScounts = tokenizeFirstSample.count_by(spacy.attrs.POS)
 
 for token in tokenizeFirstSample:
-    print(token.text)
+    if (token.pos == 91):
+        print(token.text)
 
 # We should remove VERBS such as walk, turn and items that are very common words in most descriptions
 
 # TODO: determine if a description of an area is similar
-# After reaching a locale pointed out by google maps
 
