@@ -19,4 +19,5 @@ p = gmap(
     title="COOL",
     width=500,
     height=400)
-show(p)
+
+#show(p)
