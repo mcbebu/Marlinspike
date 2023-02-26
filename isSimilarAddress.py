@@ -20,7 +20,7 @@ def tokenize(str):
     :param str: string to be tokenised
     :return: List of tokens
     """
-    strList = str.split(", ")
+    strList = str.split(" ")
     for i in range(len(strList)):
         for IW in IGNORED_WORDS:
             strList[i] = re.sub(IW, "", strList[i])
@@ -104,11 +104,13 @@ def get_similar_addresses(location, limit, customer_info, column):
                 break
     return dict(zip(results, sim_results))
 
-sample_dict = {"Addresses": ["addr1", "addr2"],
-               "X": ["x1", "x2"],
-               "Y": ["y1", "y2"],
-               "Desc": ["desc1", "desc2"]}
+sample_dict =     incase = {
+        "address": ["Bukit Bato St 23", "Changi Airport", "Cres Batok Bukit", "Bukit Batok Crescent"],
+        "longitude": ["103.75587", "103.989441", "103.8667", "103.741247"],
+        "latitude": ["1.34082", "1.359167", "1.3000", "1.338296"],
+        "description": ["Hungry", "Traveller", "Thirsty", "Worky"]
+    }
 
-#x = get_similar_addresses("addr1", 1, sample_dict, 0)
+x = get_similar_addresses("Bukit Batok St 25", 2, sample_dict, 0)
 
-#[print(y) for y in x.items()]
+[print(y) for y in x.items()]

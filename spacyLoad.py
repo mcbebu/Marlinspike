@@ -1,23 +1,31 @@
 # import anyio
 # import appnope
 # import attrs
-
 import spacy
-nlp = spacy.load('en_core_web_lg')
-tokenizeFirstSample = nlp(u'Walk across the road and turn left after the church')
-tokenizeSecondSample = nlp(u'walk by the church then turn')
-tokenizeThirdSample = nlp(u'walk by the playground and look for a red house')
+import pandas
 
-print(tokenizeFirstSample.similarity(tokenizeSecondSample));
-print(tokenizeThirdSample.similarity(tokenizeFirstSample));
+nlp = spacy.load('en_core_web_md')
+tokenizeFirstSample = nlp(u'I slapped him in the face')
+tokenizeSecondSample = nlp(u'he hit me on the head')
+print(tokenizeFirstSample.similarity(tokenizeSecondSample)); # returns 0.88
+# what is a good threshold?
+
 POScounts = tokenizeFirstSample.count_by(spacy.attrs.POS)
 
-for token in tokenizeFirstSample:
-    if token.pos == "NOUN":
-        print(token.text)
+# for token in tokenizeFirstSample:
+#     if (token.pos == 91):
+#         print(token.text)
 
-# We should remove VERBS such as walk, turn and items that are very common words in most descriptions
+# Named Entity Recognition on Singapore address test
+prop_noun_sample1 = nlp(u'Yishun Ring Road Block 327')
 
-# TODO: determine if a description of an area is similar and aggregate them
-# After reaching a locale pointed out by google maps, there are 5 different
+def show_ents(doc):
+    if doc.ents:
+        for ent in doc.ents:
+            print(ent.text + ' - ' + str(spacy.explain(ent.label_)))
+    else:
+        print("nothing here!")
+
+show_ents(prop_noun_sample1)
+#
 
