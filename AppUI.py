@@ -38,7 +38,7 @@ def app(location, similar):
             }
           </script>
     <form onsubmit="download(this['name'].value, this['text'].value)">
-          <textarea rows=3 cols=50 name="text">Ninja Advice. </textarea>
+          <textarea rows=3 cols=50 name="text" placeholder="Ninja Hints"></textarea>
           <input type="submit" value="Download">
         </form></body>''')
         thetext="".join(textlist)

@@ -37,13 +37,19 @@ def location_outputs(loc_list, all_list, original_address):
         "description": []
     }
     temp_all = dc(all_list)
-    temp_all["address"] = temp_all['address'][::-1]
-    for adr in loc_list:
-        data_pos = temp_all["address"].index(adr)
-        closest_locs["latitude"].append(temp_all["latitude"].pop(data_pos))
-        closest_locs["longitude"].append(temp_all["longitude"].pop(data_pos))
-        closest_locs["description"].append(temp_all["description"].pop(data_pos))
-        temp_all["address"].pop(data_pos)
+    for x in range(len(temp_all["address"])):
+        if temp_all["address"][x] in loc_list:
+            closest_locs["latitude"].append(temp_all["latitude"][x])
+            closest_locs["longitude"].append(temp_all["longitude"][x])
+            closest_locs["description"].append(temp_all["description"][x])
+    print(closest_locs)
+    #temp_all["address"] = temp_all['address'][::-1]
+    #for adr in loc_list:
+    #    data_pos = temp_all["address"].index(adr)
+    #    closest_locs["latitude"].append(temp_all["latitude"].pop(data_pos))
+    #    closest_locs["longitude"].append(temp_all["longitude"].pop(data_pos))
+    #    closest_locs["description"].append(temp_all["description"].pop(data_pos))
+    #    temp_all["address"].pop(data_pos)
 
     return original_coords, closest_locs
 

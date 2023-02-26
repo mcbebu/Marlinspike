@@ -1,4 +1,4 @@
-Bukit Batok St 23,Changi Airport,Geylang Road,Jurong East,Bukit Batok Crescent
+Bukit Batok St 23,Changi Airport,Geylang Road,Jurong East,Singapore Zoo
 103.75587,103.989441,103.8667,103.741247,103.7907
 1.34082,1.359167,1.3000,1.338296,1.4040
-"Take second left turn after PIE, carpark at St 24",Traveller,Thirsty,Worky,Park at Bukit Batok 24
+"Take second left turn after PIE, carpark at St 24",Traveller,Thirsty,Worky,This should be the zoo
