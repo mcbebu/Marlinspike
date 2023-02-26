@@ -1,6 +1,7 @@
 import webview
 from GIS import createhtml
 from time import sleep
+import os
 
 Exsimilar = {
     'longitude': [-6.215555671198995],
@@ -47,5 +48,8 @@ def app(location, similar):
     window = webview.create_window("MAP", 'main.html', js_api=api,)
     api.set_window(window)
     webview.start()
+    returnobject = ""
     with open('C:\\Users\\Georgie\\Downloads\\undefined.txt', 'r') as response:
-        return response.read()
+        returnobject = response.read()
+    os.remove("C:\\Users\\Georgie\\Downloads\\undefined.txt")
+    return returnobject

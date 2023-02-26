@@ -4,8 +4,7 @@ from geopy.geocoders import Nominatim
 from AppUI import app
 from csv import reader, writer
 from copy import deepcopy as dc
-
-temp_data = {}
+temp_data={}
 
 with open('data.txt', 'r', newline='') as f:
     values = [row for row in reader(f)]
@@ -13,9 +12,6 @@ with open('data.txt', 'r', newline='') as f:
     temp_data["longitude"] = values[1]
     temp_data["latitude"] = values[2]
     temp_data["description"] = values[3]
-
-
-# print(isSimilarAddress.get_similar_addresses("adr1",2,temp_data,0))
 def prelim_lat_long(address):
     geolocator = Nominatim(user_agent="MyApp")
     location = geolocator.geocode(address)
@@ -37,7 +33,6 @@ def location_outputs(loc_list, all_list, original_address):
         "description": []
     }
     temp_all = dc(all_list)
-    # temp_all["address"] = temp_all['address'][::-1]
     for adr in loc_list:
         data_pos = temp_all["address"].index(adr)
         closest_locs["latitude"].append(temp_all["latitude"].pop(data_pos))
@@ -46,8 +41,6 @@ def location_outputs(loc_list, all_list, original_address):
         temp_all["address"].pop(data_pos)
 
     return original_coords, closest_locs
-
-
 # output is ( (coordinates), {similar address dictionary} )
 
 # print(location_outputs(isSimilarAddress.get_similar_addresses("adr1",2,temp_data,0), temp_data, "adr1"))
@@ -68,14 +61,12 @@ def new_data(all_list, new_adr, new_discr):
         w = writer(f)
         [w.writerow(all_list[keys]) for keys in all_list.keys()]
 
-
 order_address = input_address()
 narrowed_list = isSimilarAddress.get_similar_addresses(order_address, 2, temp_data, 0)
-# print(narrowed_list)
 address_n_adjacent = location_outputs(narrowed_list, temp_data, order_address)
-# print(address_n_adjacent[0])
+print(address_n_adjacent[0])
 address_n_adjacent[1]['latitude'] = [float(x) for x in address_n_adjacent[1]['latitude']]
 address_n_adjacent[1]['longitude'] = [float(x) for x in address_n_adjacent[1]['longitude']]
-# print(address_n_adjacent[1])
+print(address_n_adjacent[1])
 new_description = app(location=address_n_adjacent[0], similar=address_n_adjacent[1])
 new_data(temp_data, order_address, new_description)
