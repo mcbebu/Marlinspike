@@ -37,7 +37,7 @@ def location_outputs(loc_list, all_list, original_address):
         "description": []
     }
     temp_all = dc(all_list)
-    # temp_all["address"] = temp_all['address'][::-1]
+    temp_all["address"] = temp_all['address'][::-1]
     for adr in loc_list:
         data_pos = temp_all["address"].index(adr)
         closest_locs["latitude"].append(temp_all["latitude"].pop(data_pos))
