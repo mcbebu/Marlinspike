@@ -20,7 +20,7 @@ def tokenize(str):
     :param str: string to be tokenised
     :return: List of tokens
     """
-    strList = str.split(", ")
+    strList = str.split(" ")
     for i in range(len(strList)):
         for IW in IGNORED_WORDS:
             strList[i] = re.sub(IW, "", strList[i])
