@@ -3,11 +3,11 @@ from GIS import createhtml
 from time import sleep
 
 Exsimilar = {
-    'longitude': [-6.215555671220000],
+    'longitude': [-6.215555671198995],
     'latitude': [106.22891070606781],
     'description': ["Additional Infomation"]}
-Exlocation = (-6.215555671198995, 106.28891070606781)
-def app(location=Exlocation, similar=Exsimilar):
+Exlocation = (-6.216555671198995, 106.23091070606781)
+def app(location, similar):
     class Api:
         def __init__(self):
             self._window = None
@@ -47,6 +47,5 @@ def app(location=Exlocation, similar=Exsimilar):
     window = webview.create_window("MAP", 'main.html', js_api=api,)
     api.set_window(window)
     webview.start()
-    with open("C:\\Users\\User\\Downloads\\undefined.txt", 'r') as response:
+    with open('C:\\Users\\Georgie\\Downloads\\undefined.txt', 'r') as response:
         return response.read()
-
