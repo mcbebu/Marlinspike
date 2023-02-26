@@ -38,13 +38,13 @@ def similarity(add1, add2):
     str1 = tokenize(add1)
     str2 = tokenize(add2)
     totalTokens = max(len(str1), len(str2))
-    matchingTokens = 0;
+    matchingTokens = 0
     for i in range(len(str1)):
         for j in range(len(str2)):
             if str1[i] == str2[j]:
                 matchingTokens += 1
                 # solve edge case of str1 which have many copies of a word from str2
-                str2[i] = re.sub("token2", "", str2[i])
+                str2[j] = re.sub("token2", "", str2[j])
                 continue
     return matchingTokens / totalTokens
 
@@ -102,15 +102,6 @@ def get_similar_addresses(location, limit, customer_info, column):
                 results.insert(j, df.iloc[i, column])
                 results.pop()
                 break
-    return dict(zip(results, sim_results))
+    print(sim_results)
+    return results
 
-sample_dict =     incase = {
-        "address": ["Bukit Bato St 23", "Changi Airport", "Cres Batok Bukit", "Bukit Batok Crescent"],
-        "longitude": ["103.75587", "103.989441", "103.8667", "103.741247"],
-        "latitude": ["1.34082", "1.359167", "1.3000", "1.338296"],
-        "description": ["Hungry", "Traveller", "Thirsty", "Worky"]
-    }
-
-x = get_similar_addresses("Bukit Batok St 25", 2, sample_dict, 0)
-
-[print(y) for y in x.items()]
