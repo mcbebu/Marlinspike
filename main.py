@@ -12,6 +12,8 @@ with open('data.txt', 'r', newline='') as f:
     temp_data["longitude"] = values[1]
     temp_data["latitude"] = values[2]
     temp_data["description"] = values[3]
+
+print(temp_data)
 # print(isSimilarAddress.get_similar_addresses("adr1",2,temp_data,0))
 def prelim_lat_long(address):
     geolocator = Nominatim(user_agent="MyApp")
@@ -34,7 +36,7 @@ def location_outputs(loc_list, all_list, original_address):
         "description": []
     }
     temp_all = dc(all_list)
-    temp_all["address"] = temp_all['address'][::-1]
+    #temp_all["address"] = temp_all['address'][::-1]
     for adr in loc_list:
         data_pos = temp_all["address"].index(adr)
         closest_locs["latitude"].append(temp_all["latitude"].pop(data_pos))
@@ -65,6 +67,7 @@ def new_data(all_list, new_adr, new_discr):
 
 order_address = input_address()
 narrowed_list = isSimilarAddress.get_similar_addresses(order_address, 2,temp_data,0)
+print(narrowed_list)
 address_n_adjacent = location_outputs(narrowed_list, temp_data, order_address)
 print(address_n_adjacent[0])
 address_n_adjacent[1]['latitude'] = [float(x) for x in address_n_adjacent[1]['latitude']]
